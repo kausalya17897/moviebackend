@@ -1,8 +1,16 @@
 import express from 'express';
 import { request } from 'express';
+import {MongoClient, ObjectId} from 'mongodb';
+import dotenv from 'dotenv';
+import { getMovieById, deleteMovieById, updateMovieById, createMovie } from './Helper.js';
+import {moviesRouter} from './routes/movies.js';
+import cors from 'cors';
 
+dotenv.config();
+console.log(process.env)
 const app=express();
 const PORT=9000;
+//const PORT=process.env.PORT;
 const movies=[
     {id:"100",
     name:"Finding Nemo",
@@ -78,36 +86,26 @@ const movies=[
     trailer:"https://www.youtube.com/embed/UY34eAUxuRk"}
      
     ];
-    
+app.use(express.json());//middleware
+//const MONGO_URL="mongodb://localhost";
+const MONGO_URL=process.env.MONGO_URL;
+//const MONGO_URL="mongodb+srv://Kausalya:welcome123@cluster0.8n5xp.mongodb.net/moviedata?retryWrites=true&w=majority"
+async function createConnection(){
+    const client=new MongoClient(MONGO_URL);
+    await client.connect();//promise
+    console.log("Mongodb connected")
+    return client;
+}
+export const client=await createConnection();
     //filter by language
     //filter by rating
  //filter by rating n language
 app.get('/',(request,response)=>{
     response.send("hello ,world***");
 });
-app.get('/movies',(request,response)=>{
-    console.log(request.query);
-    const {language,rating}=request.query;
-    console.log(language,rating)
-   let filterMovies=movies
-    if(language){
-         filterMovies=filterMovies.filter((a)=>a.language===language)
-    }
-    if(rating){
-        filterMovies=filterMovies.filter((a)=>a.rating===+rating)
-   }
-        response.send(filterMovies);
-    
-})
-app.get('/movies/:id',(request,response)=>{
-    console.log(request.params);
-    const {id}=request.params;
-    const movie=movies.find((a)=>a.id===id);
-    console.log(movie);
-    
-   movie
-    ?response.send(movie)
-    :response.send({message:"no matching movie"});
-})
-app.get('/movies')
+
+app.use('/movies', moviesRouter)
+
 app.listen(PORT,()=>console.log(`App is started ${PORT}`))
+
+
