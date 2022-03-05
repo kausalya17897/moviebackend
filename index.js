@@ -9,8 +9,8 @@ import cors from 'cors';
 dotenv.config();
 console.log(process.env)
 const app=express();
-const PORT=9000;
-//const PORT=process.env.PORT;
+//const PORT=9000;
+const PORT=process.env.PORT;
 const movies=[
     {id:"100",
     name:"Finding Nemo",
@@ -89,7 +89,7 @@ const movies=[
 app.use(express.json());//middleware
 //const MONGO_URL="mongodb://localhost";
 const MONGO_URL=process.env.MONGO_URL;
-//const MONGO_URL="mongodb+srv://Kausalya:welcome123@cluster0.8n5xp.mongodb.net/moviedata?retryWrites=true&w=majority"
+
 async function createConnection(){
     const client=new MongoClient(MONGO_URL);
     await client.connect();//promise
