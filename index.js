@@ -87,6 +87,7 @@ const movies=[
      
     ];
 app.use(express.json());//middleware
+app.use(cors());
 //const MONGO_URL="mongodb://localhost";
 const MONGO_URL=process.env.MONGO_URL;
 
