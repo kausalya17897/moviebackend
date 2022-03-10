@@ -1,6 +1,6 @@
 import express from 'express';
-import { createUser, getUserByName } from '..Helper.js';
-import {genPassword} from "../editbikebyid.js";
+import { createUser, getUserByName } from '../Helper.js';
+import {genPassword} from "../Helper.js";
 import bcrypt from 'bcrypt'
 import jwt  from 'jsonwebtoken';
 import dotenv from "dotenv";
