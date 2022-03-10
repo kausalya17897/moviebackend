@@ -2,8 +2,9 @@ import express from 'express';
 import { request } from 'express';
 import {MongoClient, ObjectId} from 'mongodb';
 import dotenv from 'dotenv';
-import { getMovieById, deleteMovieById, updateMovieById, createMovie } from './Helper.js';
+import { getMovieById, deleteMovieById, updateMovieById, createMovie } from '../Helper.js';
 import {moviesRouter} from './routes/movies.js';
+import { usersRouter } from './routes/users.js';
 import cors from 'cors';
 
 dotenv.config();
