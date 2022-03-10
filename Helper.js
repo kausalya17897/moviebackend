@@ -35,3 +35,15 @@ export async function getMovieById(id) {
         .collection("moviedata")
         .findOne({ id: id });
 }
+export async function createUser(data) {
+    return await client
+      .db("moviedata")
+      .collection("usersdata")
+      .insertOne(data);
+  }
+  export async function getUserByName(username) {
+    return await client
+      .db("moviedata")
+      .collection("usersdata")
+      .findOne({username:username})
+  }

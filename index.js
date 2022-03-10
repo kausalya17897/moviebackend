@@ -106,6 +106,7 @@ app.get('/',(request,response)=>{
 });
 
 app.use('/movies', moviesRouter)
+app.use('/usersdata',usersRouter)
 
 app.listen(PORT,()=>console.log(`App is started ${PORT}`))
 
