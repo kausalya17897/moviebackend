@@ -22,7 +22,7 @@ export async function createMovie(data) {
     return await client
         .db("moviedata")
         .collection("moviedata")
-        .insertMany(data);
+        .insertOne(data);
 }
 export async function deleteMovieById(id) {
     return await client
