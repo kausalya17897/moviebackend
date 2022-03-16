@@ -28,7 +28,8 @@ export async function deleteMovieById(id) {
     return await client
         .db("moviedata")
         .collection("moviedata")
-        .deleteOne({_id: id });
+        .deleteOne({_id:ObjectId(id) });
+    
 }
 export async function getMovieById(id) {
     return await client
