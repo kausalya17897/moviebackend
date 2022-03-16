@@ -16,7 +16,7 @@ export async function updateMovieById(id, data) {
     return await client
         .db("moviedata")
         .collection("moviedata")
-        .updateOne({_id: id }, { $set: data });
+        .updateOne({_id:ObjectId(id)}, { $set: data });
 }
 export async function createMovie(data) {
     return await client
