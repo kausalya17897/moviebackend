@@ -8,6 +8,7 @@ const router=express.Router();
 dotenv.config();
 router
 .route("/signup").post(async(request,response)=>{
+  try{
   const {username,password}=request.body;
   const userFromDB=await getUserByName(username);
  console.log("user",userFromDB);
@@ -33,7 +34,10 @@ if(
    
 const hashpassword=await genPassword(password);
  const result=await createUser({username,password:hashpassword});
-  response.send(result);
+  response.send.json(result);
+}catch(err){
+  return response.json(err)
+}
 });
 
 router.route("/login").post(async(request,response)=>{
